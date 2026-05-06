@@ -1,0 +1,14 @@
+B2Open Systems layer
+=================================================================
+
+This layer provides recipes and customizations used during company 
+training. There may be intentional problems and bugs used as examples.
+
+DO NOT USE IN A PRODUCTION ENVIRONMENT!
+
+This layer depends on:
+
+URI: git://git.openembedded.org/openembedded-core
+branch: master
+revision: HEAD
+
