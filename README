@@ -4,7 +4,7 @@ B2Open Systems layer
 This layer provides recipes and customizations used during company 
 training. There may be intentional problems and bugs used as examples.
 
-DO NOT USE IN A PRODUCTION ENVIRONMENT!
+** DO NOT USE IN A PRODUCTION ENVIRONMENT! **
 
 This layer depends on:
 
@@ -12,3 +12,49 @@ URI: git://git.openembedded.org/openembedded-core
 branch: master
 revision: HEAD
 
+---
+
+## Hardware used in Training
+ - Module Toradex Colibri iMX8DX/iMX8QDX
+ - BaseBoard Toradex ASTER
+
+> There may be specific customizations/modifications for the Toradex Colibri iMX8X module; again, this layer is only used for B2Open Systems training and may cause errors on other hardware outside of the training environment.
+
+
+---
+
+## Build process summary
+
+```
+Build Configuration:
+BB_VERSION           = "2.8.1"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-tdx-linux"
+MACHINE              = "colibri-imx8x"
+DISTRO               = "tdx-xwayland"
+DISTRO_VERSION       = "7.5.0-devel-20260507142754+build.0"
+TUNE_FEATURES        = "aarch64 armv8a crypto"
+TARGET_FPU           = ""
+meta-toradex-nxp     = "HEAD:e43ed4b34727f351a63232013de205b27f09180f"
+meta-freescale       = "HEAD:902dde8c5bd29bb507ac8d37772565a6c9ab77cd"
+meta-freescale-3rdparty = "HEAD:70c83e96c7f75e73245cb77f1b0cada9ed4bbc6d"
+meta-toradex-ti      = "HEAD:d30db4b7b9b6b27af75427fbb59f089bc6ab9c1e"
+meta-arm-toolchain   
+meta-arm             = "HEAD:a81c19915b5b9e71ed394032e9a50fd06919e1cd"
+meta-ti-bsp          
+meta-ti-extras       = "HEAD:ea8c0b1cf1ab8a0b327e3feb1144c1ccf05b8278"
+meta-toradex-bsp-common = "HEAD:3fead3b1e2dcf83e086647b4f0e4185a94f12f11"
+meta-oe              
+meta-filesystems     
+meta-networking      
+meta-multimedia      
+meta-python          = "HEAD:2b26d30fc7f478f5735d514f0c1bc28f6a4148b6"
+meta-freescale-distro = "HEAD:b9d6a5d9931922558046d230c1f5f4ef6ee72345"
+meta-toradex-demos   = "HEAD:4ba1cebc6909ee7a83d569e8cc748f69e6a0a24f"
+meta-qt5             = "HEAD:9ae2fe2696b10f5dc4253c4f467dc388139860bd"
+meta-tpm             = "HEAD:afbbe28cee4af2c6760aaead43a4a3ef29969809"
+meta-toradex-distro  = "HEAD:65a1511acecc37d9e9252c588bc57ac7944c92f5"
+meta-poky            = "HEAD:bf6aea52c4009e08f26565c33ce432eec7cfb090"
+meta                 = "HEAD:6988157ad983978ffd6b12bcefedd4deaffdbbd1"
+```

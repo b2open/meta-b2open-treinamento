@@ -1,0 +1,162 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+/*
+ * Copyright 2019 Toradex
+ */
+
+/dts-v1/;
+
+#include "imx8qxp-colibri.dtsi"
+#include "imx8x-colibri-eval-v3.dtsi"
+
+/ {
+	model = "Toradex Colibri iMX8QXP on B2Board Black River";
+	compatible = "toradex,colibri-imx8x-eval-v3",
+                     "toradex,colibri-imx8x", "fsl,imx8qxp", "toradex,imx8-b2b-black-river";
+
+    /*
+    dht11: dht11 {
+        compatible = "dht11";
+        
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_dht11>;
+        gpios = <&lsio_gpio1 2 GPIO_ACTIVE_HIGH>;
+        status = "okay";
+    };
+    */
+
+    /*
+    rich_shield_buttons {
+        compatible = "gpio-keys";
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_keys_shield>;
+
+        button-0 {
+            label = "Tecla KEY0";
+            gpios = <&lsio_gpio1 17 GPIO_ACTIVE_LOW>;
+            linux,code = <KEY_RIGHT>;
+        };
+
+        button-1 {
+            label = "Tecla KEY1";
+            gpios = <&lsio_gpio1 7 GPIO_ACTIVE_LOW>;
+            linux,code = <KEY_LEFT>;
+        };
+    };
+    */
+
+};
+
+/* Colibri Ethernet */
+&fec1 {
+    status = "okay";
+};
+
+/* Colibri Analogue Inputs- KNOB, LDR e NTC */
+&adc0 {
+    status = "okay";
+};
+
+/* Colibri UART_B */
+&lpuart0 {
+    status = "okay";
+};
+
+/* Colibri UART_C */
+&lpuart2 {
+    status = "okay";
+};
+
+/* Colibri UART_A */
+&lpuart3 {
+    status= "okay";
+};
+
+/* Colibri SDCard */
+&usdhc2 {
+    status = "okay";
+};
+
+/* Colibri PWM_A - KEY1 */
+&adma_pwm {
+    status = "disabled";
+};
+
+/* Colibri PWM_B */
+&lsio_pwm0 {
+    /* SODIMM  28  - LED2  */
+    status = "disabled";
+};
+
+/* Colibri PWM_C */
+&lsio_pwm1 {
+    /* SODIMM  30  - LED3  */
+    status = "disabled";
+};
+
+/* Colibri PWM_D */
+&lsio_pwm2 {
+    /* SODIMM 67 - BUZZER */
+    status = "okay";
+};
+
+&flexcan1 {
+    status = "disabled";
+};
+
+&flexcan2 {
+    status = "disabled";
+};
+
+&flexcan3 {
+    status = "disabled";
+};
+
+/* Colibri SPI - PIN USED IN DHT11 */
+&lpspi2 {
+    status = "disabled";
+};
+
+&i2c1 {
+    status = "okay";
+
+    eeprom@57 {
+        compatible = "microchip,24c02", "atmel,24c02";
+        reg = <0x57>;
+        pagesize = <8>;
+        // address-width = <8>;
+    };
+};
+
+&iomuxc {
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_ext_io0>, <&pinctrl_hog0>, <&pinctrl_hog1>,
+                <&pinctrl_lpspi2_cs2>, <&pinctrl_gpio_shield>;
+
+    pinctrl_gpio_shield: gpio-shield {
+    	fsl,pins = <
+                IMX8QXP_USB_SS3_TC1_LSIO_GPIO4_IO04	0x20          	/* SODIMM 133 - LED1  */
+                IMX8QXP_UART1_TX_LSIO_GPIO0_IO21	0x20          	/* SODIMM 28  - LED2  */
+                IMX8QXP_UART1_RX_LSIO_GPIO0_IO22	0x20          	/* SODIMM 30  - LED3  */
+                IMX8QXP_FLEXCAN1_TX_LSIO_GPIO1_IO18	0x20          	/* SODIMM 55  - LED4  */
+                IMX8QXP_SPI0_CS1_LSIO_GPIO1_IO07	0x06000061		/* SODIMM_59  - KEY1 Pull-up 100K */
+                IMX8QXP_FLEXCAN1_RX_LSIO_GPIO1_IO17	0x06000061		/* SODIMM_63  - KEY0 Pull-up 100K */
+        >;
+    };
+
+    /*
+    pinctrl_keys_shield: keys-shield {
+        fsl,pins = <
+                IMX8QXP_SPI0_CS1_LSIO_GPIO1_IO07	0x71
+                IMX8QXP_FLEXCAN1_RX_LSIO_GPIO1_IO17	0x71
+        >;
+    };
+    */
+
+    /*
+    pinctrl_dht11: dht11grp  {
+    	fsl,pins = <
+		        IMX8QXP_SPI2_SDI_LSIO_GPIO1_IO02	0x06000021		// SODIMM_90 - PULL-UP
+	    >;
+    };
+    */
+};
