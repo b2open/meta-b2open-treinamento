@@ -14,6 +14,7 @@ IMAGE_INSTALL:append = " \
                         lighttpd \
                         lighttpd-module-cgi \
                         picocom \
+                        procps \
                         htop \
                         nano \
                         net-tools \
