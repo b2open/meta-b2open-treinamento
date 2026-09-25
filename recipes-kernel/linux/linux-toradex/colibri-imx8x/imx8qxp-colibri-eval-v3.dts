@@ -12,6 +12,19 @@
     model = "Toradex Colibri iMX8QXP on B2Board Black River";
     compatible = "toradex,colibri-imx8x-eval-v3",
              "toradex,colibri-imx8x", "fsl,imx8qxp", "toradex,imx8-b2b-black-river";
+
+	leds {
+		compatible = "gpio-leds";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_gpio_leds>;
+
+		user-led4 {
+			label = "yellow:user4";
+			gpios = <&lsio_gpio1 18 GPIO_ACTIVE_HIGH>;
+			/* panic-indicator; */
+            linux,default-trigger = "heartbeat";
+		};
+	};
 };
 
 &iomuxc {
@@ -19,12 +32,17 @@
     pinctrl-0 = <&pinctrl_ext_io0>, <&pinctrl_hog0>, <&pinctrl_hog1>,
                 <&pinctrl_lpspi2_cs2>, <&pinctrl_gpio_shield>;
 
+    pinctrl_gpio_leds: gpio-leds{
+        fsl,pins = <
+                IMX8QXP_FLEXCAN1_TX_LSIO_GPIO1_IO18   0x20          /* SODIMM 55  - LED4  */
+        >;
+    };
+
     pinctrl_gpio_shield: gpio-shield {
     	fsl,pins = <
                 IMX8QXP_USB_SS3_TC1_LSIO_GPIO4_IO04   0x20          /* SODIMM 133 - LED1  */
                 IMX8QXP_UART1_TX_LSIO_GPIO0_IO21      0x20          /* SODIMM 28  - LED2  */
                 IMX8QXP_UART1_RX_LSIO_GPIO0_IO22      0x20          /* SODIMM 30  - LED3  */
-                IMX8QXP_FLEXCAN1_TX_LSIO_GPIO1_IO18   0x20          /* SODIMM 55  - LED4  */
         >;
     };
 };
